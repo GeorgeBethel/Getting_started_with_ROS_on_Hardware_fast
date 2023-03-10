@@ -7,13 +7,13 @@ import struct
 
 
 class led(genpy.Message):
-  _md5sum = "2e72d8d4579cf7ba2c7a9cea0cf0c7ab"
+  _md5sum = "781db327ac3ac8924f798b25d3f9bd79"
   _type = "led_control/led"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """string ledState #string to hold the desired LED state
+  _full_text = """bool ledState #string to hold the desired LED state
 """
   __slots__ = ['ledState']
-  _slot_types = ['string']
+  _slot_types = ['bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -33,9 +33,9 @@ class led(genpy.Message):
       super(led, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.ledState is None:
-        self.ledState = ''
+        self.ledState = False
     else:
-      self.ledState = ''
+      self.ledState = False
 
   def _get_types(self):
     """
@@ -49,12 +49,7 @@ class led(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.ledState
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(_get_struct_B().pack(self.ledState))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -66,14 +61,9 @@ class led(genpy.Message):
     try:
       end = 0
       start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.ledState = str[start:end].decode('utf-8')
-      else:
-        self.ledState = str[start:end]
+      end += 1
+      (self.ledState,) = _get_struct_B().unpack(str[start:end])
+      self.ledState = bool(self.ledState)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -86,12 +76,7 @@ class led(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      _x = self.ledState
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(_get_struct_B().pack(self.ledState))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -104,14 +89,9 @@ class led(genpy.Message):
     try:
       end = 0
       start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.ledState = str[start:end].decode('utf-8')
-      else:
-        self.ledState = str[start:end]
+      end += 1
+      (self.ledState,) = _get_struct_B().unpack(str[start:end])
+      self.ledState = bool(self.ledState)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -120,3 +100,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
+_struct_B = None
+def _get_struct_B():
+    global _struct_B
+    if _struct_B is None:
+        _struct_B = struct.Struct("<B")
+    return _struct_B

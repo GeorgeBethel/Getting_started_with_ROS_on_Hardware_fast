@@ -25,7 +25,7 @@ class led {
         this.ledState = initObj.ledState
       }
       else {
-        this.ledState = '';
+        this.ledState = false;
       }
     }
   }
@@ -33,7 +33,7 @@ class led {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type led
     // Serialize message field [ledState]
-    bufferOffset = _serializer.string(obj.ledState, buffer, bufferOffset);
+    bufferOffset = _serializer.bool(obj.ledState, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -42,14 +42,12 @@ class led {
     let len;
     let data = new led(null);
     // Deserialize message field [ledState]
-    data.ledState = _deserializer.string(buffer, bufferOffset);
+    data.ledState = _deserializer.bool(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    let length = 0;
-    length += object.ledState.length;
-    return length + 4;
+    return 1;
   }
 
   static datatype() {
@@ -59,13 +57,13 @@ class led {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '2e72d8d4579cf7ba2c7a9cea0cf0c7ab';
+    return '781db327ac3ac8924f798b25d3f9bd79';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    string ledState #string to hold the desired LED state
+    bool ledState #string to hold the desired LED state
     
     `;
   }
@@ -80,7 +78,7 @@ class led {
       resolved.ledState = msg.ledState;
     }
     else {
-      resolved.ledState = ''
+      resolved.ledState = false
     }
 
     return resolved;

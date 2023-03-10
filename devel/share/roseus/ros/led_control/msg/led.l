@@ -19,10 +19,10 @@
 (defmethod led_control::led
   (:init
    (&key
-    ((:ledState __ledState) "")
+    ((:ledState __ledState) nil)
     )
    (send-super :init)
-   (setq _ledState (string __ledState))
+   (setq _ledState __ledState)
    self)
   (:ledState
    (&optional __ledState)
@@ -30,34 +30,34 @@
   (:serialization-length
    ()
    (+
-    ;; string _ledState
-    4 (length _ledState)
+    ;; bool _ledState
+    1
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; string _ledState
-       (write-long (length _ledState) s) (princ _ledState s)
+     ;; bool _ledState
+       (if _ledState (write-byte -1 s) (write-byte 0 s))
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; string _ledState
-     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _ledState (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; bool _ledState
+     (setq _ledState (not (= 0 (sys::peek buf ptr- :char)))) (incf ptr- 1)
    ;;
    self)
   )
 
-(setf (get led_control::led :md5sum-) "2e72d8d4579cf7ba2c7a9cea0cf0c7ab")
+(setf (get led_control::led :md5sum-) "781db327ac3ac8924f798b25d3f9bd79")
 (setf (get led_control::led :datatype-) "led_control/led")
 (setf (get led_control::led :definition-)
-      "string ledState #string to hold the desired LED state
+      "bool ledState #string to hold the desired LED state
 
 ")
 
 
 
-(provide :led_control/led "2e72d8d4579cf7ba2c7a9cea0cf0c7ab")
+(provide :led_control/led "781db327ac3ac8924f798b25d3f9bd79")
 
 

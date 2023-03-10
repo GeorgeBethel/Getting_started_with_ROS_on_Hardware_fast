@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(led_control_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/include " STREQUAL " ")
+if(NOT "/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/include;/home/george/Getting_started_with_ROS_on_Hardware_fast/src/led_control/include " STREQUAL " ")
   set(led_control_INCLUDE_DIRS "")
-  set(_include_dirs "/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/include")
+  set(_include_dirs "/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/include;/home/george/Getting_started_with_ROS_on_Hardware_fast/src/led_control/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -116,7 +116,7 @@ if(NOT "/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/include " S
   endforeach()
 endif()
 
-set(libraries "")
+set(libraries "led_control")
 foreach(library ${libraries})
   # keep build configuration keywords, target names and absolute libraries as-is
   if("${library}" MATCHES "^(debug|optimized|general)$")
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/george/Getting_started_with_ROS_on_Hardware_fast/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/george/Getting_started_with_ROS_on_Hardware_fast/devel/lib;/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -185,7 +185,7 @@ foreach(t ${led_control_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "")
+set(depends "roscpp;rospy;std_msgs;message_generation")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls

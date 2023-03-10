@@ -24,16 +24,16 @@ struct led_
   typedef led_<ContainerAllocator> Type;
 
   led_()
-    : ledState()  {
+    : ledState(false)  {
     }
   led_(const ContainerAllocator& _alloc)
-    : ledState(_alloc)  {
+    : ledState(false)  {
   (void)_alloc;
     }
 
 
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _ledState_type;
+   typedef uint8_t _ledState_type;
   _ledState_type ledState;
 
 
@@ -70,7 +70,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
 // {'led_control': ['/home/george/Getting_started_with_ROS_on_Hardware_fast/src/led_control/msg'], 'std_msgs': ['/opt/ros/melodic/share/std_msgs/cmake/../msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -80,12 +80,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::led_control::led_<ContainerAllocator> >
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::led_control::led_<ContainerAllocator> const>
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
@@ -114,12 +114,12 @@ struct MD5Sum< ::led_control::led_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "2e72d8d4579cf7ba2c7a9cea0cf0c7ab";
+    return "781db327ac3ac8924f798b25d3f9bd79";
   }
 
   static const char* value(const ::led_control::led_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x2e72d8d4579cf7baULL;
-  static const uint64_t static_value2 = 0x2c7a9cea0cf0c7abULL;
+  static const uint64_t static_value1 = 0x781db327ac3ac892ULL;
+  static const uint64_t static_value2 = 0x4f798b25d3f9bd79ULL;
 };
 
 template<class ContainerAllocator>
@@ -138,7 +138,7 @@ struct Definition< ::led_control::led_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "string ledState #string to hold the desired LED state\n"
+    return "bool ledState #string to hold the desired LED state\n"
 ;
   }
 
@@ -177,7 +177,7 @@ struct Printer< ::led_control::led_<ContainerAllocator> >
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::led_control::led_<ContainerAllocator>& v)
   {
     s << indent << "ledState: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.ledState);
+    Printer<uint8_t>::stream(s, indent + "  ", v.ledState);
   }
 };
 

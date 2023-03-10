@@ -3,6 +3,6 @@ prefix=/home/george/Getting_started_with_ROS_on_Hardware_fast/devel
 Name: led_control
 Description: Description of led_control
 Version: 0.0.0
-Cflags: -I/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/include
-Libs: -L/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/lib 
-Requires: 
+Cflags: -I/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/include -I/home/george/Getting_started_with_ROS_on_Hardware_fast/src/led_control/include
+Libs: -L/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/lib -lled_control
+Requires: roscpp rospy std_msgs message_generation
