@@ -1,0 +1,2 @@
+led_control
+-DCATKIN_DEVEL_PREFIX=/home/george/Getting_started_with_ROS_on_Hardware_fast/devel -DCMAKE_INSTALL_PREFIX=/home/george/Getting_started_with_ROS_on_Hardware_fast/install -G Unix Makefiles

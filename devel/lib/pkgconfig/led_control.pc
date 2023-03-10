@@ -1,0 +1,8 @@
+prefix=/home/george/Getting_started_with_ROS_on_Hardware_fast/devel
+
+Name: led_control
+Description: Description of led_control
+Version: 0.0.0
+Cflags: -I/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/include
+Libs: -L/home/george/Getting_started_with_ROS_on_Hardware_fast/devel/lib 
+Requires: 
